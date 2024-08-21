@@ -1,6 +1,11 @@
 # William Sando's Web Scraper
 
+Written in Node 18.15.0
+
+    'npm install npx -g'
+    'npm install'
     'npx playwright test'
+    'npx playwright show-report'
     
 ### What would I do with more time?
 
