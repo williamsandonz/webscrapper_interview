@@ -15,9 +15,6 @@ https://www.airbnb.co.uk/rooms/50633275
 - Some of these URLs may not actually show property details – please handle this case appropriately.
 
 TODO:
-    - propertyType
-    - handle 404
-    - ensure script loads all 3
-    - ensure project is installable for Jake
-    - document issues
-    - brainstorm how I would solve better with more time
+    - Where is propertyType?
+    - Ensure project is installable
+    - Write outputs/tasks if I had more time

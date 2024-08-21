@@ -1,5 +1,4 @@
-import { Locator, type Page } from "@playwright/test";
-import { test, expect } from '@playwright/test';
+import { type Page } from "@playwright/test";
 
 export class AirBNBListingsScraper {
 
@@ -14,20 +13,22 @@ export class AirBNBListingsScraper {
   constructor(private page: Page, private listingId: number) {
   }
   
-  async start(): Promise<void> {
+  async start(): Promise<ListingData> {
     const response = await this.page.goto(`https://www.airbnb.co.uk/rooms/${this.listingId}`);
     if(response === null) {
       throw new Error(`HTTP response was null for listing ${this.listingId}`);
     }
     if(response.status() === 410) {
-      throw new Error(`Listing page cannot be found (404) for listing ${this.listingId}`);
+      // This condition executes for listingId 33571268
+      throw new Error(`Listing page cannot be found (410) for listing ${this.listingId}`);
     }
     await this.scrapeTitle();
     const overviewSection = await this.getOverviewSection();
     this.data.numberOfBedrooms = await this.scrapeTextWithinOverview(overviewSection, /([0-9]+)\sbedroom/, true) as number;
     this.data.numberOfBathrooms = await this.scrapeTextWithinOverview(overviewSection, /([0-9]+)\sbathroom/, true) as number;
     await this.scrapeAmenities();
-    console.log(this.data);
+    console.log(JSON.stringify(this.data));
+    return this.data;
   }
 
   async scrapeTitle(): Promise<void> {

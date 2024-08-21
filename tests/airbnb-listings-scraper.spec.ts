@@ -1,16 +1,30 @@
 import { test, expect } from '@playwright/test';
 import { AirBNBListingsScraper } from './airbnb-listing-scraper';
+import { expectedListings } from './expected-data';
 
-test('AirBNB Listing Scraper', async ({ page }) => {
+test('It handles an 410 HTTP response from Air BNB (Missing listing)', async ({ page }) => {
 
-  // Define the listing ID we want to scrape.
-  // Let's assume in a real-world automated scenario that this would be provided externally during runtime.
-  // E.G An AWS SQS queue would include the id in sendMessage() & the lambda would receive it via the REST call.
-  const listingId = 20669368; // <!-- Jake: You can swap these to test each listingId: 50633275. 33571268 
+  const listingId = 33571268;
   
   const listingsScraper = new AirBNBListingsScraper(page, listingId);
-  await listingsScraper.start();
   
-  // await expect(true).toBe(true);
+  try {
+    const scrapedData = await listingsScraper.start();
+  } catch(e) {
+    await expect(e.message).toContain('410');
+  }
+  
+});
+
+test('It successfully scrapes data for an HTTP 200 call', async ({ page }) => {
+
+  const listingId = 20669368; // 20669368 || 50633275
+  
+  const listingsScraper = new AirBNBListingsScraper(page, listingId);
+  
+  const scrapedData = await listingsScraper.start();
+  const expectedData = expectedListings.find(expectedListing => expectedListing.listingId === listingId)?.data;
+  
+  await expect(expectedData).toEqual(scrapedData);
   
 });
