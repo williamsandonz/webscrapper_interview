@@ -1,0 +1,23 @@
+- Spend only a few hours on this exercise
+- List of outputs/tasks that you have not been able to demonstrate in your solution (given the limited time) that you would have done if this had been a project you were asked to complete as part of your job.
+
+Please write some code that scrapes:
+    - property name
+    - property type (e.g Apartment)
+    - number of bedrooms
+    - bathrooms
+    - list of the amenities for the following 3 properties:
+
+https://www.airbnb.co.uk/rooms/33571268
+https://www.airbnb.co.uk/rooms/20669368
+https://www.airbnb.co.uk/rooms/50633275
+
+- Some of these URLs may not actually show property details – please handle this case appropriately.
+
+TODO:
+    - propertyType
+    - handle 404
+    - ensure script loads all 3
+    - ensure project is installable for Jake
+    - document issues
+    - brainstorm how I would solve better with more time
