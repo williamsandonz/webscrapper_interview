@@ -24,7 +24,7 @@ Written in Node 18.15.0
 * Alerting
     * Due to the brittle nature of web scrapers it is likely that failures will inevitably arise. In these scenarios it would be helpful to have immediatel visibility of the issues to ensure rapid triaging. Using AWS SNS Topics to alert to applications like PagerDuty and slack could help in this regard.
 * Security & Denial of Wallet protection
-    * Protect the lambda against DoW attacks and also ensure malicious users can't trigger any unauthorised scrapping as this could be used to not only cost TravelNest a lot of money in Lambda costs but also to launch a DDOS attack on AirBNB. 
+    * Protect the lambda against DoW attacks and also ensure malicious users can't trigger any unauthorised scrapping as this could be used to not only cost a lot of money in Lambda costs but also to launch a DDOS attack on AirBNB. 
     * Possibly solution: SQS.sendMessage() could contain a secret in it's payload that the lambda could check before executing. This would be injected via the Scheduled lambda using something like Secret Manager or similiar.
 * Ethical & legal scraping
     * It would be wise to check the legal and ethical guidelines are conformed to. For example, ensuring no personal data is scraped whether via omission or obfuscation.
